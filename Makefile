@@ -65,6 +65,10 @@ dirty-contents 			= $(shell git diff --shortstat 2>/dev/null 2>/dev/null | tail 
 
 # --> patch
 
+update:
+	@echo "$(magenta-bold)Updating proxy.golang.org Package Registry ...$(reset)"
+	@GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
+
 bump-patch:
 	@if ! git diff --quiet --exit-code; then \
 		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
@@ -83,7 +87,7 @@ commit-patch: bump-patch
 	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 patch-release: commit-patch
-	GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
+	update
 
 # --> minor
 
@@ -105,7 +109,7 @@ commit-minor: bump-minor
 	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 minor-release: commit-minor
-	GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
+	update
 
 # --> major
 
@@ -127,4 +131,4 @@ commit-major: bump-major
 	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 major-release: commit-major
-	GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
+	update
