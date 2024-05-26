@@ -70,7 +70,7 @@ all :: patch-release update
 update:
 	@echo "$(magenta-bold)Updating GO Package Registry ...$(reset)"
 	@GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
-	@curl "https://proxy.golang.org/$(package)/@v/v$(version).info"
+	@curl --silent "https://proxy.golang.org/$(package)/@v/v$(version).info" | jq 2>/dev/null || curl --silent "https://proxy.golang.org/$(package)/@v/v$(version).info"
 
 bump-patch:
 	@if ! git diff --quiet --exit-code; then \
