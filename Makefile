@@ -70,9 +70,7 @@ bump-patch:
 		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
 		exit 1; \
 	else \
-		echo "Version Bump: Current Version - $(version)"; \
 		echo "$(patch-upgrade)" > VERSION; \
-		echo "Updated Version - $(version)"; \
 	fi
 
 commit-patch: bump-patch
@@ -93,9 +91,7 @@ bump-minor:
 		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
 		exit 1; \
 	else \
-		echo "Version Bump: Current Version - $(version)"; \
 		echo "$(minor-upgrade)" > VERSION; \
-		echo "Updated Version - $(version)"; \
 	fi
 
 commit-minor: bump-minor
@@ -116,9 +112,7 @@ bump-major:
 		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
 		exit 1; \
 	else \
-		echo "Version Bump: Current Version - $(version)"; \
 		echo "$(major-upgrade)" > VERSION; \
-		echo "Updated Version - $(version)"; \
 	fi
 
 commit-major: bump-major
