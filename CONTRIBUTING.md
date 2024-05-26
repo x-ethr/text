@@ -27,7 +27,7 @@ _The following section refers to publishing package(s) to https://pkg.go.dev._
     ```
 6. Make the module available, publicly.
     ```bash
-    GOPROXY=proxy.golang.org go list -m "x-ethr/example@v$(head VERSION)"
+    GOPROXY=proxy.golang.org go list -m "github.com/x-ethr/example@v$(head VERSION)"
     ```
 
 ### Pre-Commit
