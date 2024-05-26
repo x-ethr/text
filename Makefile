@@ -63,9 +63,9 @@ dirty-contents 			= $(shell git diff --shortstat 2>/dev/null 2>/dev/null | tail 
 # Package-Specific Target(s)
 # ------------------------------------------------------------------------------------
 
-all :: release
+# --> patch
 
-bump:
+bump-patch:
 	@if ! git diff --quiet --exit-code; then \
 		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
 		exit 1; \
@@ -75,11 +75,53 @@ bump:
 		echo "Updated Version: $(verison)" ;\
 	fi
 
-commit: bump
-	@echo "$(blue-bold)Tag-Release$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
+commit-patch: bump-patch
+	@echo "$(blue-bold)Tag-Release (Patch)$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
 	@git add VERSION; \
-	@git commit --message "Tag-Release: \"$(package)\" - $(version)"; \
+	@git commit --message "Tag-Release (Patch): \"$(package)\" - $(version)"; \
 	@git push --tags origin "v$(version)"; \
     @echo "$(green-bold)Published Tagged Release$(reset): $(verison)"; \
 
-release: commit
+patch-release: commit-patch
+
+# --> minor
+
+bump-minor:
+	@if ! git diff --quiet --exit-code; then \
+		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
+		exit 1; \
+	else \
+		echo "Version Bump: Current Version - $(version)"; \
+		echo "$(minor-upgrade)" > VERSION; \
+		echo "Updated Version: $(verison)" ;\
+	fi
+
+commit-minor: bump-minor
+	@echo "$(blue-bold)Tag-Release (Minor)$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
+	@git add VERSION; \
+	@git commit --message "Tag-Release (Minor): \"$(package)\" - $(version)"; \
+	@git push --tags origin "v$(version)"; \
+    @echo "$(green-bold)Published Tagged Release$(reset): $(verison)"; \
+
+minor-release: commit-minor
+
+# --> major
+
+bump-major:
+	@if ! git diff --quiet --exit-code; then \
+		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
+		exit 1; \
+	else \
+		echo "Version Bump: Current Version - $(version)"; \
+		echo "$(major-upgrade)" > VERSION; \
+		echo "Updated Version: $(verison)" ;\
+	fi
+
+commit-major: bump-major
+	@echo "$(blue-bold)Tag-Release (Major)$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
+	@git add VERSION; \
+	@git commit --message "Tag-Release (Major): \"$(package)\" - $(version)"; \
+	@git push --tags origin "v$(version)"; \
+    @echo "$(green-bold)Published Tagged Release$(reset): $(verison)"; \
+
+major-release: commit-major
