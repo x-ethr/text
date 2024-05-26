@@ -40,9 +40,11 @@ fail	= (echo $(time) $(red)[ FAILURE ]$(reset) && false)
 # Utility Command(s)
 # ------------------------------------------------------------------------------------
 
-all :: deploy
+url = $(shell git config --get remote.origin.url | sed -r 's/.*(\@|\/\/)(.*)(\:|\/)([^:\/]*)\/([^\/\.]*)\.git/https:\/\/\2\/\4\/\5/')
 
-name = $(shell basename $(CURDIR))
+repository = $(shell basename -s .git $(shell git config --get remote.origin.url))
+organization = $(shell git remote -v | grep "(fetch)" | sed 's/.*\/\([^ ]*\)\/.*/\1/')
+package = $(shell printf "github.com/%s/%s" "$(organization)" "$(repository)")
 
 version = $(shell [ -f VERSION ] && head VERSION || echo "0.0.0")
 
@@ -57,31 +59,32 @@ patch-upgrade 	= $(major).$(minor).$(shell expr $(patch) + 1)
 dirty = $(shell git diff --quiet)
 dirty-contents 			= $(shell git diff --shortstat 2>/dev/null 2>/dev/null | tail -n1)
 
-
-
 # ====================================================================================
 # Package-Specific Target(s)
 # ------------------------------------------------------------------------------------
 
-fail:
+all :: release
 
 bump:
-	if [[ ! $(git diff --quiet --exit-code) ]]; then ;\
-    	@echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again" ;\
-    	exit 1 ;\
-	else ;\
-		@echo "$(blue-bold)Version Bump$(reset): Current Version - $(version)" ;\
-		@echo $(patch-upgrade) > VERSION ;\
-		@echo "$(green-bold)Updated Version$(reset): $(verison)" ;\
+	@if ! git diff --quiet --exit-code; then \
+		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
+		exit 1; \
+	else \
+		echo "Version Bump: Current Version - $(version)"; \
+		echo "$(patch-upgrade)" > VERSION; \
+		echo "Updated Version: $(verison)" ;\
 	fi
 
-commit:
-	if [[ ! $(git diff --quiet --exit-code) ]]; then ;\
-    	@echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again" ;\
-    	exit 1 ;\
-	else ;\
-		@git add VERSION
-		@git commit --message "Tag-Release $()"
-		@echo $(patch-upgrade) > VERSION ;\
-		@echo "$(green-bold)Updated Version$(reset): $(verison)" ;\
+commit: bump
+	@if ! git diff --quiet --exit-code; then \
+		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
+		exit 1; \
+	else \
+	    echo "$(blue-bold)Tag-Release$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
+		git add VERSION; \
+		git commit --message "Tag-Release: \"$(package)\" - $(version)"; \
+		git push --tags origin "v$(version)"; \
+        echo "$(green-bold)Published Tagged Release$(reset): $(verison)"; \
 	fi
+
+release: commit

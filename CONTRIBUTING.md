@@ -26,6 +26,15 @@ _The following section refers to publishing package(s) to https://pkg.go.dev._
     GOPROXY=proxy.golang.org go list -m "github.com/x-ethr/example@v$(head VERSION)"
     ```
 
+Adding the package to `pkg.go.dev` may need to be requested. Navigate to the mirror's expected url, and follow
+instructions for requesting the addition.
+
+- Example: https://dev.go.dev/github.com/x-ethr/example
+
+Upon successful request, a message should be displayed:
+
+> _We're still working on “github.com/x-ethr/example”. Check back in a few minutes!_
+
 ### Pre-Commit
 
 The following project makes use of `pre-commit` for local-development `git-hooks`. These hooks are useful
