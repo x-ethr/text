@@ -76,15 +76,10 @@ bump:
 	fi
 
 commit: bump
-	@if ! git diff --quiet --exit-code; then \
-		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
-		exit 1; \
-	else \
-	    echo "$(blue-bold)Tag-Release$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
-		git add VERSION; \
-		git commit --message "Tag-Release: \"$(package)\" - $(version)"; \
-		git push --tags origin "v$(version)"; \
-        echo "$(green-bold)Published Tagged Release$(reset): $(verison)"; \
-	fi
+	@echo "$(blue-bold)Tag-Release$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
+	@git add VERSION; \
+	@git commit --message "Tag-Release: \"$(package)\" - $(version)"; \
+	@git push --tags origin "v$(version)"; \
+    @echo "$(green-bold)Published Tagged Release$(reset): $(verison)"; \
 
 release: commit
