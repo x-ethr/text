@@ -72,7 +72,7 @@ bump-patch:
 	else \
 		echo "Version Bump: Current Version - $(version)"; \
 		echo "$(patch-upgrade)" > VERSION; \
-		echo "Updated Version - $(verison)"; \
+		echo "Updated Version - $(version)"; \
 	fi
 
 commit-patch: bump-patch
@@ -82,7 +82,7 @@ commit-patch: bump-patch
 	@git push --set-upstream origin main
 	@git tag "v$(version)"
 	@git push --tags origin "v$(version)"
-	@echo "$(green-bold)Published Tagged Release$(reset): $(verison)"
+	@echo "$(green-bold)Published Tagged Release$(reset): $(version)"
 
 patch-release: commit-patch
 
@@ -95,7 +95,7 @@ bump-minor:
 	else \
 		echo "Version Bump: Current Version - $(version)"; \
 		echo "$(minor-upgrade)" > VERSION; \
-		echo "Updated Version - $(verison)"; \
+		echo "Updated Version - $(version)"; \
 	fi
 
 commit-minor: bump-minor
@@ -105,7 +105,7 @@ commit-minor: bump-minor
 	@git push --set-upstream origin main
 	@git tag "v$(version)"
 	@git push --tags origin "v$(version)"
-	@echo "$(green-bold)Published Tagged Release$(reset): $(verison)"
+	@echo "$(green-bold)Published Tagged Release$(reset): $(version)"
 
 minor-release: commit-minor
 
@@ -118,7 +118,7 @@ bump-major:
 	else \
 		echo "Version Bump: Current Version - $(version)"; \
 		echo "$(major-upgrade)" > VERSION; \
-		echo "Updated Version - $(verison)"; \
+		echo "Updated Version - $(version)"; \
 	fi
 
 commit-major: bump-major
@@ -128,6 +128,6 @@ commit-major: bump-major
 	@git push --set-upstream origin main
 	@git tag "v$(version)"
 	@git push --tags origin "v$(version)"
-	@echo "$(green-bold)Published Tagged Release$(reset): $(verison)"
+	@echo "$(green-bold)Published Tagged Release$(reset): $(version)"
 
 major-release: commit-major
