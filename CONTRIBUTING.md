@@ -6,16 +6,56 @@ _The following section refers to publishing package(s) to https://pkg.go.dev._
 
 - See GO's [*Publishing a Module*](https://go.dev/doc/modules/publishing) for additional details.
 
-1. Ensure a [`LICENSE`](https://spdx.org/licenses/) is added to the project.
-2. Assign a tag to the package source and push it into VCS.
-```bash
+1. Establish a [`LICENSE`](https://spdx.org/licenses/) to the project.
+2. Ensure dependencies are updated.
+    ```bash
+    go mod tidy
+    ```
+3. Verify [`vendor`](https://go.dev/ref/mod#vendoring) requirements.
+    ```bash
+    go mod vendor
+    ```
+4. Sync the working tree's `HEAD` with its remote.
+    ```bash
+    git add .
+    git commit --message "<commit-msg>"
+    git push --set-upstream origin main
+    ```
+5. Assign a tag and push.
+    ```bash
+    git tag "v$(head VERSION)"
+    ```
+6. Make the module available, publicly.
+    ```bash
+    GOPROXY=proxy.golang.org go list -m "x-ethr/example@v$(head VERSION)"
+    ```
 
+### Pre-Commit
+
+The following project makes use of `pre-commit` for local-development `git-hooks`. These hooks are useful
+in cases such as preventing secrets from getting pushed into version-control.
+
+See the [`.pre-commit-config.yaml`](.pre-commit-config.yaml) for implementation specifics.
+
+#### Local Setup
+
+1. Install pre-commit from https://pre-commit.com/#install.
+2. Auto-update the config to the latest repos' versions by executing `pre-commit autoupdate`.
+3. Install with `pre-commit install`.
+
+#### General Command Reference(s)
+
+**Update the configuration's upstreams**
+
+```bash
+pre-commit autoupdate
 ```
 
+**Install `pre-commit` to local instance**
 
-git commit --message "Release Version: v0.1.0"
-git tag v0.1.0
-
+```bash
+pre-commit install
+```
 
 ## Documentation
 
