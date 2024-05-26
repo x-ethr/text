@@ -79,10 +79,11 @@ commit-patch: bump-patch
 	@git commit --message "Tag-Release (Patch): \"$(package)\" - $(version)"
 	@git push --set-upstream origin main
 	@git tag "v$(version)"
-	@git push --tags origin "v$(version)"
+	@git push origin "v$(version)"
 	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 patch-release: commit-patch
+	GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
 
 # --> minor
 
@@ -100,10 +101,11 @@ commit-minor: bump-minor
 	@git commit --message "Tag-Release (Minor): \"$(package)\" - $(version)"
 	@git push --set-upstream origin main
 	@git tag "v$(version)"
-	@git push --tags origin "v$(version)"
+	@git push origin "v$(version)"
 	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 minor-release: commit-minor
+	GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
 
 # --> major
 
@@ -121,7 +123,8 @@ commit-major: bump-major
 	@git commit --message "Tag-Release (Major): \"$(package)\" - $(version)"
 	@git push --set-upstream origin main
 	@git tag "v$(version)"
-	@git push --tags origin "v$(version)"
+	@git push origin "v$(version)"
 	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 major-release: commit-major
+	GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
