@@ -21,33 +21,33 @@ Official `godoc` documentation (with examples) can be found at the [Package Regi
 go get -u github.com/x-ethr/text
 ```
 
-###### Import & Write Code
+###### Import & Implement
 
-In your preferred editor add the following content to `main.go`
+`main.go`
 
 ```go
 package main
 
 import (
-    "context"
-    "fmt"
-    "log"
-
     "github.com/x-ethr/text"
-    "github.com/aws/aws-sdk-go-v2/config"
-    "github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
 func main() {
     const example = "test-value"
 
-    ptr := text.Pointer(example, text.Variadic(o text.Options) {
-        o.
-    } )
+    ptr := text.Pointer(example) // initialize ptr as a reference to example
+
+    // --> optionally construct text.Options for logging
+    ptr = text.Pointer(example, text.Variadic(o text.Options) {
+        o.Log = true // output a warning if string is empty
+    })
+
+    ...
 }
 ```
 
-- Optionally, refer to the [code examples](./example_test.go) for usage and implementation details.
+- Please refer to the [code examples](./example_test.go) for additional usage and implementation details.
+- See https://pkg.go.dev/github.com/x-ethr/text for additional documentation.
 
 ## Contributions
 
