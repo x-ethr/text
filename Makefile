@@ -65,6 +65,12 @@ dirty-contents 			= $(shell git diff --shortstat 2>/dev/null 2>/dev/null | tail 
 
 all :: patch-release update
 
+tidy:
+	@go mod tidy
+
+test: tidy
+	@go test ./...
+
 # --> patch
 
 update:
@@ -72,7 +78,7 @@ update:
 	@GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
 	@curl --silent "https://proxy.golang.org/$(package)/@v/v$(version).info" | jq 2>/dev/null || curl --silent "https://proxy.golang.org/$(package)/@v/v$(version).info"
 
-bump-patch:
+bump-patch: test
 	@if ! git diff --quiet --exit-code; then \
 		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
 		exit 1; \
@@ -93,7 +99,7 @@ patch-release: commit-patch
 
 # --> minor
 
-bump-minor:
+bump-minor: test
 	@if ! git diff --quiet --exit-code; then \
 		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
 		exit 1; \
@@ -114,7 +120,7 @@ minor-release: commit-minor
 
 # --> major
 
-bump-major:
+bump-major: test
 	@if ! git diff --quiet --exit-code; then \
 		echo "$(red-bold)Dirty Working Tree$(reset) - Commit Changes and Try Again"; \
 		exit 1; \

@@ -2,12 +2,14 @@ package text_test
 
 import (
 	"fmt"
+
+	"github.com/x-ethr/text"
 )
 
 func ExampleLowercase() {
 	v := "Field-Name"
 
-	fmt.Println(str.Lowercase(v))
+	fmt.Println(text.Lowercase(v))
 	// Output: field-name
 }
 
@@ -15,20 +17,20 @@ func ExampleTitle() {
 	// v represents a name that should be otherwise capitalized (titled)
 	v := "jacob b. sanders"
 
-	fmt.Println(str.Title(v))
+	fmt.Println(text.Title(v))
 	// Output: Jacob B. Sanders
 }
 
 func ExampleVariadic() {
-	v := str.Dereference(nil, func(o str.Options) {
+	v := text.Dereference(nil, func(o text.Options) {
 		o.Log = true
 	})
 
 	fmt.Println(v)
 	// Output:
 
-	pointer := str.Pointer("example")
-	v = str.Dereference(pointer, func(o str.Options) {
+	pointer := text.Pointer("example")
+	v = text.Dereference(pointer, func(o text.Options) {
 		o.Log = true
 	})
 
@@ -38,10 +40,10 @@ func ExampleVariadic() {
 
 func ExampleDereference() {
 	// initialize a string pointer of underlying value "example"
-	pointer := str.Pointer("example")
+	pointer := text.Pointer("example")
 
 	// establish variable "v" of type string
-	v := str.Dereference(pointer, func(o str.Options) {
+	v := text.Dereference(pointer, func(o text.Options) {
 		o.Log = true // log if the pointer is nil
 	})
 
@@ -51,7 +53,7 @@ func ExampleDereference() {
 
 func ExamplePointer() {
 	// create a pointer of type string with reference value: "example"
-	pointer := str.Pointer("example", func(o str.Options) {
+	pointer := text.Pointer("example", func(o text.Options) {
 		o.Log = true // log if the string value is an empty string
 	})
 
