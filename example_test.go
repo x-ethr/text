@@ -22,7 +22,7 @@ func ExampleTitle() {
 }
 
 func ExampleVariadic() {
-	v := text.Dereference(nil, func(o text.Options) {
+	v := text.Dereference(nil, func(o *text.Options) {
 		o.Log = true
 	})
 
@@ -30,7 +30,7 @@ func ExampleVariadic() {
 	// Output:
 
 	pointer := text.Pointer("example")
-	v = text.Dereference(pointer, func(o text.Options) {
+	v = text.Dereference(pointer, func(o *text.Options) {
 		o.Log = true
 	})
 
@@ -43,7 +43,7 @@ func ExampleDereference() {
 	pointer := text.Pointer("example")
 
 	// establish variable "v" of type string
-	v := text.Dereference(pointer, func(o text.Options) {
+	v := text.Dereference(pointer, func(o *text.Options) {
 		o.Log = true // log if the pointer is nil
 	})
 
@@ -53,7 +53,7 @@ func ExampleDereference() {
 
 func ExamplePointer() {
 	// create a pointer of type string with reference value: "example"
-	pointer := text.Pointer("example", func(o text.Options) {
+	pointer := text.Pointer("example", func(o *text.Options) {
 		o.Log = true // log if the string value is an empty string
 	})
 

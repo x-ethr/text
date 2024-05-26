@@ -20,12 +20,13 @@ type Options struct {
 	Options []cases.Option
 }
 
-// Variadic represents a functional constructor for the [Options] type.
-type Variadic func(o Options)
+// Variadic represents a functional constructor for the [Options] type. Typical callers of Variadic won't need to perform
+// nil checks as all implementations first construct an [Options] reference using packaged default(s).
+type Variadic func(o *Options)
 
 // options represents a default constructor.
-func options() Options {
-	return Options{ // default Options constructor
+func options() *Options {
+	return &Options{ // default Options constructor
 		Language: language.AmericanEnglish,
 	}
 }
