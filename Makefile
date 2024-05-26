@@ -63,6 +63,8 @@ dirty-contents 			= $(shell git diff --shortstat 2>/dev/null 2>/dev/null | tail 
 # Package-Specific Target(s)
 # ------------------------------------------------------------------------------------
 
+all :: patch-release update
+
 # --> patch
 
 update:
@@ -87,7 +89,6 @@ commit-patch: bump-patch
 	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 patch-release: commit-patch
-	update
 
 # --> minor
 
@@ -109,7 +110,6 @@ commit-minor: bump-minor
 	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 minor-release: commit-minor
-	update
 
 # --> major
 
@@ -131,4 +131,3 @@ commit-major: bump-major
 	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 major-release: commit-major
-	update
