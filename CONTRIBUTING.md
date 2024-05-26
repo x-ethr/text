@@ -11,21 +11,17 @@ _The following section refers to publishing package(s) to https://pkg.go.dev._
     ```bash
     go mod tidy
     ```
-3. Verify [`vendor`](https://go.dev/ref/mod#vendoring) requirements.
-    ```bash
-    go mod vendor
-    ```
-4. Sync the working tree's `HEAD` with its remote.
+3. Sync the working tree's `HEAD` with its remote.
     ```bash
     git add .
     git commit --message "<commit-msg>"
     git push --set-upstream origin main
     ```
-5. Assign a tag and push.
+4. Assign a tag and push.
     ```bash
     git tag "v$(head VERSION)" && git push origin "v$(head VERSION)"
     ```
-6. Make the module available, publicly.
+5. Make the module available, publicly.
     ```bash
     GOPROXY=proxy.golang.org go list -m "github.com/x-ethr/example@v$(head VERSION)"
     ```
