@@ -4,39 +4,11 @@
 
 ### Exclusion(s)
 
-index.html
-
 .netrc
 .git-credentials
 
-.env
-*.env
-*.env.*
-
-http-api
-
-build
-builds
-
-dist
-internalos
-distributions
-
-*.pem
-
 *.binary
 **/*.binary
-
-*.log
-*.logs
-
-### Inclusion(s)
-
-!global-bundle.pem
-
-!.example.env
-!*.example.env
-!*.example.env.*
 
 # ##############################################################################
 # Git-Ignore Templates (Auto-Generated, DO NOT MODIFY SECTIONS BELOW)
