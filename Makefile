@@ -68,7 +68,7 @@ all :: patch-release update
 # --> patch
 
 update:
-	@echo "$(magenta-bold)Updating proxy.golang.org Package Registry ...$(reset)"
+	@echo "$(magenta-bold)Updating GO Package Registry ...$(reset)"
 	@GOPROXY=proxy.golang.org go list -m "$(package)@v$(version)"
 
 bump-patch:
