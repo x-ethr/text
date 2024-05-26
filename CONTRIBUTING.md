@@ -23,7 +23,7 @@ _The following section refers to publishing package(s) to https://pkg.go.dev._
     ```
 5. Assign a tag and push.
     ```bash
-    git tag "v$(head VERSION)"
+    git tag "v$(head VERSION)" && git push origin "v$(head VERSION)"
     ```
 6. Make the module available, publicly.
     ```bash
