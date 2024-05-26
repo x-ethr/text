@@ -35,6 +35,8 @@ Upon successful request, a message should be displayed:
 
 > _We're still working on “github.com/x-ethr/example”. Check back in a few minutes!_
 
+For any other issues, consult the [official](https://pkg.go.dev/about#adding-a-package) documentation.
+
 ### Pre-Commit
 
 The following project makes use of `pre-commit` for local-development `git-hooks`. These hooks are useful
