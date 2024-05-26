@@ -80,7 +80,7 @@ commit-patch: bump-patch
 	@git push --set-upstream origin main
 	@git tag "v$(version)"
 	@git push --tags origin "v$(version)"
-	@echo "$(green-bold)Published Tagged Release$(reset): $(version)"
+	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 patch-release: commit-patch
 
@@ -101,7 +101,7 @@ commit-minor: bump-minor
 	@git push --set-upstream origin main
 	@git tag "v$(version)"
 	@git push --tags origin "v$(version)"
-	@echo "$(green-bold)Published Tagged Release$(reset): $(version)"
+	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 minor-release: commit-minor
 
@@ -122,6 +122,6 @@ commit-major: bump-major
 	@git push --set-upstream origin main
 	@git tag "v$(version)"
 	@git push --tags origin "v$(version)"
-	@echo "$(green-bold)Published Tagged Release$(reset): $(version)"
+	@echo "$(green-bold)Published Tag$(reset): $(version)"
 
 major-release: commit-major
