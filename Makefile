@@ -76,11 +76,11 @@ bump-patch:
 	fi
 
 commit-patch: bump-patch
-	@echo "$(blue-bold)Tag-Release (Patch)$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
-	@git add VERSION; \
-	@git commit --message "Tag-Release (Patch): \"$(package)\" - $(version)"; \
-	@git push --tags origin "v$(version)"; \
-    @echo "$(green-bold)Published Tagged Release$(reset): $(verison)"; \
+	@echo "$(blue-bold)Tag-Release (Patch)$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"
+	@git add VERSION
+	@git commit --message "Tag-Release (Patch): \"$(package)\" - $(version)"
+	@git push --tags origin "v$(version)"
+	@echo "$(green-bold)Published Tagged Release$(reset): $(verison)"
 
 patch-release: commit-patch
 
@@ -97,11 +97,11 @@ bump-minor:
 	fi
 
 commit-minor: bump-minor
-	@echo "$(blue-bold)Tag-Release (Minor)$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
-	@git add VERSION; \
-	@git commit --message "Tag-Release (Minor): \"$(package)\" - $(version)"; \
-	@git push --tags origin "v$(version)"; \
-    @echo "$(green-bold)Published Tagged Release$(reset): $(verison)"; \
+	@echo "$(blue-bold)Tag-Release (Minor)$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"
+	@git add VERSION
+	@git commit --message "Tag-Release (Minor): \"$(package)\" - $(version)"
+	@git push --tags origin "v$(version)"
+	@echo "$(green-bold)Published Tagged Release$(reset): $(verison)"
 
 minor-release: commit-minor
 
@@ -118,10 +118,10 @@ bump-major:
 	fi
 
 commit-major: bump-major
-	@echo "$(blue-bold)Tag-Release (Major)$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"; \
-	@git add VERSION; \
-	@git commit --message "Tag-Release (Major): \"$(package)\" - $(version)"; \
-	@git push --tags origin "v$(version)"; \
-    @echo "$(green-bold)Published Tagged Release$(reset): $(verison)"; \
+	@echo "$(blue-bold)Tag-Release (Major)$(reset): \"$(yellow-bold)$(package)$(reset)\" - $(white-bold)$(version)$(reset)"
+	@git add VERSION
+	@git commit --message "Tag-Release (Major): \"$(package)\" - $(version)"
+	@git push --tags origin "v$(version)"
+	@echo "$(green-bold)Published Tagged Release$(reset): $(verison)"
 
 major-release: commit-major
