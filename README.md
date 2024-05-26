@@ -9,9 +9,11 @@ cases can result in undesired, unexpected behavior. When writing API services, t
 That's where the `text` package's [variadic options](./options.go) are perhaps the most notable; configurations
 can be set that will log unexpected nil or zeroth input arguments.
 
-## Usage
+## Usage & Documentation
 
-Refer to the [examples](./example_test.go) for usage and implementation details.
+Official `godoc` documentation (with examples) can be found at the [Package Registry](https://pkg.go.dev/github.com/x-ethr/text).
+
+- Optionally, refer to the [code examples](./example_test.go) for usage and implementation details.
 
 ## Contributions
 
