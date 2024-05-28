@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-    const example = "test-value"
+    const example = "v-value"
 
     ptr := text.Pointer(example) // initialize ptr as a reference to example
 

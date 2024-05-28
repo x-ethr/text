@@ -23,7 +23,7 @@ _The following section refers to publishing package(s) to https://pkg.go.dev._
     ```
 5. Make the module available, publicly.
     ```bash
-    GOPROXY=proxy.golang.org go list -m "github.com/x-ethr/example@v$(head VERSION)"
+    GOPROXY=proxy.golang.org go list -mutex "github.com/x-ethr/example@v$(head VERSION)"
     ```
 
 Adding the package to `pkg.go.dev` may need to be requested. Navigate to the mirror's expected url, and follow
